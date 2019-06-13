@@ -14,17 +14,18 @@
                     <h3>Update Singer</h3>
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control">
+                    <input name="name"type="text" class="form-control" value="<%=updateSinger.name%>">
                 </div>
                 <div class="form-group">
                      <label for="Link">Link </label>   
-                     <input class="form-control" type="text">
+                     <input name="link"class="form-control" type="text" value="<%=updateSinger.link%>">
 
                 </div>
                 <div class="form-group">
-                  <label for="Image">Image</label>
-                  <input class="form-control" type="text">
+                  <label for="Image">Image Link</label>
+                  <input name="avatar"class="form-control" type="text" value="<%=updateSinger.avatar%>">
                 </div>
+               <input class="sr-only"name="id"type="text" value="<%=updateSinger._id%>">
                 <button class="btn btn-success">Update singer</button>
               </form>
           </div>

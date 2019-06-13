@@ -5,6 +5,7 @@ class Singer{
         this.link = link;
         this.avatar = avatar;
     }
+    
 }
 
 // const profileLink = "";
@@ -17,17 +18,38 @@ let arraySinger = [
 ]
 module.exports = {
 
-newSinger:(name,link,avatar) => {
+newSinger(name,link,avatar){
     let lgth = arraySinger.length;
     let id = arraySinger[lgth-1]._id+1;
     const newSinger = new Singer(id,name,link,avatar);
     this.addSinger(newSinger);
     console.log('update array',arraySinger);
 },
-addSinger: (singer) => {
+addSinger(singer){
     arraySinger.push(singer);
 },
-getSinger:() => {
+getSinger(){
     return arraySinger;
+},
+getSingerbyId(id){
+   return arraySinger.find((singer) => {
+       return singer._id==id;
+   })
+},
+removeSingerById(id){
+    let index = arraySinger.findIndex((singer) => {
+        return singer._id==id;
+    })
+    arraySinger.splice(index,1);
+},
+updateSinger(_id,name,link,avatar){
+    const _index =  arraySinger.findIndex((singer) => {
+        return singer._id==_id;
+    })
+    arraySinger[_index].name = name;
+    arraySinger[_index].link = link;
+    arraySinger[_index].avatar = avatar;
+
 }
+
 }

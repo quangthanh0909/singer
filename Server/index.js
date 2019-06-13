@@ -23,6 +23,24 @@ app.post('/addsinger',(req,res,next) => {
   res.redirect('..');
 })
 
+app.get('/removesinger',(req,res) => {
+  singer.removeSingerById(req.query.id);
+  res.redirect('..');
+})
+
+app.get('/updatesinger',(req,res) => {
+  let updateSinger = singer.getSingerbyId(req.query.id);
+  res.render('updateSinger',{updateSinger});
+  // res.redirect('..');
+})
+app.post('/updatesinger',(req,res) => {
+  let data=req.body;
+  console.log(data);
+  
+  singer.updateSinger(data.id,data.name,data.link,data.avatar);
+  res.redirect('..');
+})
+
 
 app.listen(3000,() => {
   console.log('Server is running');
