@@ -41,7 +41,9 @@ app.post('/updatesinger',(req,res) => {
   res.redirect('..');
 })
 
-
+app.get('*',(req,res) => {
+  res.render('error');
+})
 app.listen(3000,() => {
   console.log('Server is running');
 })
