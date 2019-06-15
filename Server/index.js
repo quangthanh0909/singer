@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const singer = require('./data/Singer');
-// app.use(express.json());
+app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 app.set('view engine','ejs');
@@ -10,7 +10,6 @@ app.set("views",path.join(__dirname,"/views"));
 app.get('/',(req,res,next) => {
   const singers = singer.getSinger();
   res.render("home",{singers});
-  console.log(singers);
   
 })
 app.get('/addsinger',(req,res,next) => {
@@ -20,12 +19,21 @@ app.get('/addsinger',(req,res,next) => {
 app.post('/addsinger',(req,res,next) => {
   console.log((req.body));
   singer.newSinger(req.body.name,req.body.link,req.body.avatar);
-  res.redirect('..');
+  res.redirect('/');
 })
 
 app.get('/removesinger',(req,res) => {
   singer.removeSingerById(req.query.id);
-  res.redirect('..');
+})
+app.post('/remove',(req,res) => {
+  // singer.removeSingerById(req.query.id);
+  // res.redirect('..');
+  console.log(req.body);
+  singer.removeSingerById(req.body.id);
+  res.send({redirect: '/'});
+  // res.redirect('http://google.com');
+
+  
 })
 
 app.get('/updatesinger',(req,res) => {
@@ -35,10 +43,8 @@ app.get('/updatesinger',(req,res) => {
 })
 app.post('/updatesinger',(req,res) => {
   let data=req.body;
-  console.log(data);
-  
   singer.updateSinger(data.id,data.name,data.link,data.avatar);
-  res.redirect('..');
+  res.redirect('/');
 })
 
 app.get('*',(req,res) => {
